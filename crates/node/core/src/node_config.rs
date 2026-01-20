@@ -379,6 +379,7 @@ impl<ChainSpec> NodeConfig<ChainSpec> {
             .with_transaction_hash_numbers_in_rocksdb(self.rocksdb.all || self.rocksdb.tx_hash)
             .with_storages_history_in_rocksdb(self.rocksdb.all || self.rocksdb.storages_history)
             .with_account_history_in_rocksdb(self.rocksdb.all || self.rocksdb.account_history)
+            .with_use_hashed_state(self.db.use_hashed_state)
     }
 
     /// Returns the max block that the node should run to, looking it up from the network if
