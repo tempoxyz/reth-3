@@ -62,6 +62,6 @@ jobs:
       - name: Run RocksDB e2e tests
         run: |
           cargo nextest run \
-            --locked --features "edge" \
+            --locked \
             -p reth-e2e-test-utils \
             -E 'binary(rocksdb)'

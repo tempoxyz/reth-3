@@ -35,7 +35,7 @@ group "default" {
 }
 
 group "nightly" {
-  targets = ["ethereum", "ethereum-profiling", "ethereum-edge-profiling", "optimism", "optimism-profiling"]
+  targets = ["ethereum", "ethereum-profiling", "optimism", "optimism-profiling"]
 }
 
 // Base target with shared configuration
@@ -82,17 +82,6 @@ target "ethereum-profiling" {
   tags = ["${REGISTRY}/reth:nightly-profiling"]
 }
 
-target "ethereum-edge-profiling" {
-  inherits = ["_base_profiling"]
-  args = {
-    BINARY        = "reth"
-    MANIFEST_PATH = "bin/reth"
-    BUILD_PROFILE = "profiling"
-    FEATURES      = "jemalloc jemalloc-prof asm-keccak min-debug-logs edge"
-  }
-  tags = ["${REGISTRY}/reth:nightly-edge-profiling"]
-}
-
 // Optimism (op-reth)
 target "optimism" {
   inherits = ["_base"]
@@ -114,13 +103,3 @@ target "optimism-profiling" {
   tags = ["${REGISTRY}/op-reth:nightly-profiling"]
 }
 
-target "optimism-edge-profiling" {
-  inherits = ["_base_profiling"]
-  args = {
-    BINARY        = "op-reth"
-    MANIFEST_PATH = "crates/optimism/bin"
-    BUILD_PROFILE = "profiling"
-    FEATURES      = "jemalloc jemalloc-prof asm-keccak min-debug-logs edge"
-  }
-  tags = ["${REGISTRY}/op-reth:nightly-edge-profiling"]
-}

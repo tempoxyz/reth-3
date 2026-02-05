@@ -15,21 +15,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  prepare-reth-stable:
+  prepare-reth:
     uses: ./.github/workflows/prepare-reth.yml
     with:
       image_tag: ghcr.io/paradigmxyz/reth:latest
       binary_name: reth
       cargo_features: "asm-keccak"
-      artifact_name: "reth-stable"
-
-  prepare-reth-edge:
-    uses: ./.github/workflows/prepare-reth.yml
-    with:
-      image_tag: ghcr.io/paradigmxyz/reth:latest
-      binary_name: reth
-      cargo_features: "asm-keccak edge"
-      artifact_name: "reth-edge"
+      artifact_name: "reth"
 
   prepare-hive:
     if: github.repository == 'paradigmxyz/reth'
@@ -87,7 +79,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        storage: [stable, edge]
         # ethereum/rpc to be deprecated:
         # https://github.com/ethereum/hive/pull/1117
         scenario:
@@ -187,10 +178,9 @@ jobs:
           - sim: ethereum/eels/consume-rlp
             limit: .*tests/paris.*
     needs:
-      - prepare-reth-stable
-      - prepare-reth-edge
+      - prepare-reth
       - prepare-hive
-    name: ${{ matrix.storage }} / ${{ matrix.scenario.sim }}${{ matrix.scenario.limit && format(' - {0}', matrix.scenario.limit) }}
+    name: ${{ matrix.scenario.sim }}${{ matrix.scenario.limit && format(' - {0}', matrix.scenario.limit) }}
     runs-on:
       group: Reth
     permissions:
@@ -209,7 +199,7 @@ jobs:
       - name: Download reth image
         uses: actions/download-artifact@v7
         with:
-          name: reth-${{ matrix.storage }}
+          name: reth
           path: /tmp
 
       - name: Load Docker images
