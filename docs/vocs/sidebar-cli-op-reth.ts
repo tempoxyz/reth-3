@@ -54,6 +54,10 @@ export const opRethCliSidebar: SidebarItem = {
                         {
                             text: "op-reth db checksum static-file",
                             link: "/cli/op-reth/db/checksum/static-file"
+                        },
+                        {
+                            text: "op-reth db checksum rocksdb",
+                            link: "/cli/op-reth/db/checksum/rocksdb"
                         }
                     ]
                 },
