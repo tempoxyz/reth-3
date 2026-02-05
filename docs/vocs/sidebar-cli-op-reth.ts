@@ -163,6 +163,10 @@ export const opRethCliSidebar: SidebarItem = {
                                 {
                                     text: "op-reth db settings set storage_changesets",
                                     link: "/cli/op-reth/db/settings/set/storage_changesets"
+                                },
+                                {
+                                    text: "op-reth db settings set use_hashed_state",
+                                    link: "/cli/op-reth/db/settings/set/use_hashed_state"
                                 }
                             ]
                         }
