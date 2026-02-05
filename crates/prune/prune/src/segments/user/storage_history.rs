@@ -75,7 +75,7 @@ where
         let range_end = *range.end();
 
         // Check where storage history indices are stored
-        #[cfg(all(unix, feature = "rocksdb"))]
+        #[cfg(unix)]
         if provider.cached_storage_settings().storages_history_in_rocksdb {
             return self.prune_rocksdb(provider, input, range, range_end);
         }
@@ -236,7 +236,7 @@ impl StorageHistory {
     ///
     /// Reads storage changesets from static files and prunes the corresponding
     /// `RocksDB` history shards.
-    #[cfg(all(unix, feature = "rocksdb"))]
+    #[cfg(unix)]
     fn prune_rocksdb<Provider>(
         &self,
         provider: &Provider,
@@ -825,7 +825,7 @@ mod tests {
         assert!(final_changesets.is_empty(), "All changesets up to block 10 should be pruned");
     }
 
-    #[cfg(all(unix, feature = "rocksdb"))]
+    #[cfg(unix)]
     #[test]
     fn prune_rocksdb() {
         use reth_db_api::models::storage_sharded_key::StorageShardedKey;

@@ -105,7 +105,7 @@ impl<N: ProviderNodeTypes> ProviderFactory<N> {
         // to read persisted settings, falling back to legacy defaults if none exist.
         //
         // Both factory and all providers it creates should share these cached settings.
-        let legacy_settings = StorageSettings::legacy();
+        let legacy_settings = StorageSettings::v1();
         let storage_settings = DatabaseProvider::<_, N>::new(
             db.tx()?,
             chain_spec.clone(),
@@ -188,12 +188,12 @@ impl<N: NodeTypesWithDB> RocksDBProviderFactory for ProviderFactory<N> {
         self.rocksdb_provider.clone()
     }
 
-    #[cfg(all(unix, feature = "rocksdb"))]
+    #[cfg(unix)]
     fn set_pending_rocksdb_batch(&self, _batch: rocksdb::WriteBatchWithTransaction<true>) {
         unimplemented!("ProviderFactory is a factory, not a provider - use DatabaseProvider::set_pending_rocksdb_batch instead")
     }
 
-    #[cfg(all(unix, feature = "rocksdb"))]
+    #[cfg(unix)]
     fn commit_pending_rocksdb_batches(&self) -> ProviderResult<()> {
         unimplemented!("ProviderFactory is a factory, not a provider - use DatabaseProvider::commit_pending_rocksdb_batches instead")
     }

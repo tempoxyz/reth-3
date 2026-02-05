@@ -2,7 +2,7 @@ use alloy_eips::eip2718::Encodable2718;
 use alloy_primitives::{TxHash, TxNumber};
 use num_traits::Zero;
 use reth_config::config::{EtlConfig, TransactionLookupConfig};
-#[cfg(all(unix, feature = "rocksdb"))]
+#[cfg(unix)]
 use reth_db_api::Tables;
 use reth_db_api::{
     table::{Decode, Decompress, Value},
@@ -199,7 +199,7 @@ where
             }
         }
 
-        #[cfg(all(unix, feature = "rocksdb"))]
+        #[cfg(unix)]
         if provider.cached_storage_settings().transaction_hash_numbers_in_rocksdb {
             provider.commit_pending_rocksdb_batches()?;
             provider.rocksdb_provider().flush(&[Tables::TransactionHashNumbers.name()])?;
@@ -601,7 +601,7 @@ mod tests {
         }
     }
 
-    #[cfg(all(unix, feature = "rocksdb"))]
+    #[cfg(unix)]
     mod rocksdb_tests {
         use super::*;
         use reth_provider::RocksDBProviderFactory;
@@ -619,7 +619,7 @@ mod tests {
 
             // Enable RocksDB for transaction hash numbers
             runner.db.factory.set_storage_settings_cache(
-                StorageSettings::legacy().with_transaction_hash_numbers_in_rocksdb(true),
+                StorageSettings::v1().with_transaction_hash_numbers_in_rocksdb(true),
             );
 
             let input = ExecInput {
@@ -687,7 +687,7 @@ mod tests {
 
             // Enable RocksDB for transaction hash numbers
             runner.db.factory.set_storage_settings_cache(
-                StorageSettings::legacy().with_transaction_hash_numbers_in_rocksdb(true),
+                StorageSettings::v1().with_transaction_hash_numbers_in_rocksdb(true),
             );
 
             // Insert blocks with transactions

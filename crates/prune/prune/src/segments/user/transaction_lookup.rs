@@ -95,7 +95,7 @@ where
         .into_inner();
 
         // Check where transaction hash numbers are stored
-        #[cfg(all(unix, feature = "rocksdb"))]
+        #[cfg(unix)]
         if provider.cached_storage_settings().transaction_hash_numbers_in_rocksdb {
             return self.prune_rocksdb(provider, input, start, end);
         }
@@ -196,7 +196,7 @@ impl TransactionLookup {
     ///
     /// Reads transactions from static files and deletes corresponding entries
     /// from the `RocksDB` `TransactionHashNumbers` table.
-    #[cfg(all(unix, feature = "rocksdb"))]
+    #[cfg(unix)]
     fn prune_rocksdb<Provider>(
         &self,
         provider: &Provider,
@@ -438,7 +438,7 @@ mod tests {
         test_prune(10, (PruneProgress::Finished, 8));
     }
 
-    #[cfg(all(unix, feature = "rocksdb"))]
+    #[cfg(unix)]
     #[test]
     fn prune_rocksdb() {
         use reth_db_api::models::StorageSettings;
@@ -492,7 +492,7 @@ mod tests {
 
         // Enable RocksDB storage for transaction hash numbers
         db.factory.set_storage_settings_cache(
-            StorageSettings::legacy().with_transaction_hash_numbers_in_rocksdb(true),
+            StorageSettings::v1().with_transaction_hash_numbers_in_rocksdb(true),
         );
 
         let provider = db.factory.database_provider_rw().unwrap();
