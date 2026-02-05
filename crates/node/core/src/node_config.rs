@@ -155,7 +155,7 @@ pub struct NodeConfig<ChainSpec> {
     /// All `RocksDB` table routing arguments
     pub rocksdb: RocksDbArgs,
 
-    /// Storage mode configuration (edge vs legacy)
+    /// Storage mode configuration (v2 vs v1/legacy)
     pub storage: StorageArgs,
 }
 

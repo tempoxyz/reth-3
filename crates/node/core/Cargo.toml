@@ -90,7 +90,7 @@ min-info-logs = ["tracing/release_max_level_info"]
 min-debug-logs = ["tracing/release_max_level_debug"]
 min-trace-logs = ["tracing/release_max_level_trace"]
 
-# Marker feature for edge/unstable builds - captured by vergen in build.rs
+# Route supported tables to RocksDB instead of MDBX
 rocksdb = ["reth-storage-api/rocksdb"]
 
 [build-dependencies]

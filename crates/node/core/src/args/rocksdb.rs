@@ -22,21 +22,21 @@ pub struct RocksDbArgs {
     /// Route tx hash -> number table to `RocksDB` instead of MDBX.
     ///
     /// This is a genesis-initialization-only flag: changing it after genesis requires a re-sync.
-    /// Defaults to the base storage mode (legacy: false, edge: true).
+    /// Defaults to the base storage mode (v1: false, v2: true).
     #[arg(long = "rocksdb.tx-hash", action = ArgAction::Set)]
     pub tx_hash: Option<bool>,
 
     /// Route storages history tables to `RocksDB` instead of MDBX.
     ///
     /// This is a genesis-initialization-only flag: changing it after genesis requires a re-sync.
-    /// Defaults to the base storage mode (legacy: false, edge: true).
+    /// Defaults to the base storage mode (v1: false, v2: true).
     #[arg(long = "rocksdb.storages-history", action = ArgAction::Set)]
     pub storages_history: Option<bool>,
 
     /// Route account history tables to `RocksDB` instead of MDBX.
     ///
     /// This is a genesis-initialization-only flag: changing it after genesis requires a re-sync.
-    /// Defaults to the base storage mode (legacy: false, edge: true).
+    /// Defaults to the base storage mode (v1: false, v2: true).
     #[arg(long = "rocksdb.account-history", action = ArgAction::Set)]
     pub account_history: Option<bool>,
 }

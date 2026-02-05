@@ -46,7 +46,7 @@ pub struct StaticFilesArgs {
     /// Note: This setting can only be configured at genesis initialization. Once
     /// the node has been initialized, changing this flag requires re-syncing from scratch.
     ///
-    /// Defaults to the base storage mode (legacy: false, edge: true).
+    /// Defaults to the base storage mode (v1: false, v2: true).
     #[arg(long = "static-files.receipts", action = clap::ArgAction::Set)]
     pub receipts: Option<bool>,
 
@@ -58,7 +58,7 @@ pub struct StaticFilesArgs {
     /// Note: This setting can only be configured at genesis initialization. Once
     /// the node has been initialized, changing this flag requires re-syncing from scratch.
     ///
-    /// Defaults to the base storage mode (legacy: false, edge: true).
+    /// Defaults to the base storage mode (v1: false, v2: true).
     #[arg(long = "static-files.transaction-senders", action = clap::ArgAction::Set)]
     pub transaction_senders: Option<bool>,
 
@@ -70,7 +70,7 @@ pub struct StaticFilesArgs {
     /// Note: This setting can only be configured at genesis initialization. Once
     /// the node has been initialized, changing this flag requires re-syncing from scratch.
     ///
-    /// Defaults to the base storage mode (legacy: false, edge: true).
+    /// Defaults to the base storage mode (v1: false, v2: true).
     #[arg(long = "static-files.account-change-sets", action = clap::ArgAction::Set)]
     pub account_changesets: Option<bool>,
 
@@ -82,7 +82,7 @@ pub struct StaticFilesArgs {
     /// Note: This setting can only be configured at genesis initialization. Once
     /// the node has been initialized, changing this flag requires re-syncing from scratch.
     ///
-    /// Defaults to the base storage mode (legacy: false, edge: true).
+    /// Defaults to the base storage mode (v1: false, v2: true).
     #[arg(long = "static-files.storage-change-sets", action = clap::ArgAction::Set)]
     pub storage_changesets: Option<bool>,
 }
